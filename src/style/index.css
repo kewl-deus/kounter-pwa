@@ -19,3 +19,9 @@ body {
 #app {
   height: 100%;
 }
+
+.p-inputnumber-input {
+  width: 40px;
+  text-align: center;
+  pointer-events: none;
+}

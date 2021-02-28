@@ -3,7 +3,7 @@ import style from './style.css';
 
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { Rating } from 'primereact/rating';
+import { InputNumber } from 'primereact/inputnumber';
 
 const list = [
   { name: 'Amiee Beverley', counter: 0 },
@@ -40,7 +40,11 @@ const list = [
 
 const Home = () => {
   const counterBodyTemplate = (row) => {
-    return <Rating value={row.counter} readOnly cancel={false} />;
+    return (
+      <InputNumber value={row.counter} showButtons buttonLayout="horizontal" step={1} min={0}
+        decrementButtonClassName="p-button-danger" incrementButtonClassName="p-button-success"
+        incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" />
+    );
   }
 
   return (
