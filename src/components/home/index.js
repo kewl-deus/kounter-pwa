@@ -1,5 +1,5 @@
 import { h } from 'preact';
-import { useState } from 'preact/hooks';
+import { useRef, useState } from 'preact/hooks';
 
 import style from './style.css';
 
@@ -59,6 +59,35 @@ const data = {
   ]
 }
 
+async function readFile(file) {
+  return new Promise(resolve => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      resolve(reader.result);
+    }
+    reader.readAsText(file);
+  });
+}
+
+function parseCSV(content, separator = ',') {
+  const lines = content.split('\n');
+  const parts = lines.map(line => line.split(separator));
+  const output = {};
+
+  let current = null;
+
+  for (const [parent, element] of parts) {
+    if (parent !== '') {
+      current = parent;
+      output[current] = [];
+    }
+
+    output[current].push(element);
+  }
+
+  return output;
+}
+
 const Home = () => {
   const [selected, setSelected] = useState(null);
 
@@ -71,11 +100,17 @@ const Home = () => {
   }
 
   const [fileDialog, setFileDialog] = useState(false);
+  const fileInput = useRef(null);
 
   const importFile = () => {
-    // Import file
-
+    fileInput.current.upload();
     setFileDialog(false);
+  }
+
+  const onFileUpload = async (event) => {
+    const content = await readFile(event.files[0]);
+    const data = parseCSV(content);
+    console.log(data);
   }
 
   const openDialog = () => {
@@ -105,10 +140,9 @@ const Home = () => {
         <Column field="counter" header="Counter" body={counterBodyTemplate}></Column>
       </DataTable>
 
-      <Dialog visible={fileDialog} style={{ width: '450px' }} header="Import file" modal class="p-fluid" footer={fileDialogFooter} onHide={hideDialog}>
+      <Dialog visible={fileDialog} style={{ width: '450px' }} header="Import file" modal class="p-fluid" footer={fileDialogFooter} onHide={hideDialog} focusOnShow={false}>
         <div className="p-field">
-          <label htmlFor="name">Name</label>
-          <FileUpload mode="basic" accept=".xls,.xlsx,.csv" label="Import" chooseLabel="Import" className="p-mr-2 p-d-inline-block" />
+          <FileUpload ref={fileInput} mode="basic" accept=".csv" label="Import" chooseLabel="Import" className="p-mr-2 p-d-inline-block" customUpload uploadHandler={onFileUpload} />
         </div>
       </Dialog>
     </main>
