@@ -1,5 +1,5 @@
 import { h } from 'preact';
-import { useRef, useState } from 'preact/hooks';
+import { useRef, useState, useEffect } from 'preact/hooks';
 
 import style from './style.css';
 
@@ -45,6 +45,17 @@ function makeOptions(data) {
   return Object.keys(data).map(key => ({ label: key, value: key }));
 }
 
+function usePersister(name, state, stateUpdater) {
+  useEffect(() => {
+    const persistedState = window.localStorage.getItem(name);
+    persistedState && stateUpdater(JSON.parse(persistedState));
+  }, []);
+
+  useEffect(() => {
+    window.localStorage.setItem(name, JSON.stringify(state));
+  }, [state]);
+}
+
 const Home = () => {
   const [fileDialog, setFileDialog] = useState(false);
   const [selected, setSelected] = useState(null);
@@ -52,6 +63,10 @@ const Home = () => {
   const [data, setData] = useState({});
 
   const fileInput = useRef(null);
+
+  usePersister('data', data, setData);
+  usePersister('options', options, setOptions);
+  usePersister('selected', selected, setSelected);
 
   const counterBodyTemplate = (row) => {
     return (
