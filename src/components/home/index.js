@@ -118,7 +118,7 @@ const Home = () => {
   const fileDialogFooter = (
     <>
       <Button label="Cancel" icon="pi pi-times" className="p-button-text" onClick={hideDialog} />
-      <Button label="Save" icon="pi pi-check" className="p-button-text" onClick={importFile} />
+      <Button label="OK" icon="pi pi-check" className="p-button-text" onClick={importFile} />
     </>
   );
 
@@ -140,7 +140,7 @@ const Home = () => {
 
       <Dialog visible={fileDialog} style={{ width: '450px' }} header="Import file" modal class="p-fluid" footer={fileDialogFooter} onHide={hideDialog} focusOnShow={false}>
         <div className="p-field">
-          <FileUpload ref={fileInput} mode="basic" accept=".csv" label="Import" chooseLabel="Import" className="p-mr-2 p-d-inline-block" customUpload uploadHandler={onFileUpload} />
+          <FileUpload ref={fileInput} mode="basic" accept=".csv" chooseLabel="Import" className="p-mr-2 p-d-inline-block" customUpload uploadHandler={onFileUpload} />
         </div>
       </Dialog>
     </main>
