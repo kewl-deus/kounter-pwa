@@ -12,53 +12,6 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { InputNumber } from 'primereact/inputnumber';
 
-const lists = [
-  { label: 'New York', value: 'NY' },
-  { label: 'Rome', value: 'RM' },
-  { label: 'London', value: 'LDN' },
-  { label: 'Istanbul', value: 'IST' },
-  { label: 'Paris', value: 'PRS' }
-];
-
-const data = {
-  NY: [
-    { name: 'Amiee Beverley', counter: 0 },
-    { name: 'Janine Rodrique', counter: 0 },
-    { name: 'Malisa Portales', counter: 0 },
-    { name: 'Lane Mcpeak', counter: 0 },
-    { name: 'Ollie Bouknight', counter: 0 },
-    { name: 'Omar Flink', counter: 0 },
-    { name: 'Kenisha Lombard', counter: 0 },
-    { name: 'Maynard Deal', counter: 0 },
-    { name: 'Eryn Valla', counter: 0 },
-    { name: 'Drema Signorelli', counter: 0 },
-    { name: 'Matilda Ocegueda', counter: 0 },
-    { name: 'Teresita Adams', counter: 0 },
-    { name: 'Patrina Nunnery', counter: 0 },
-    { name: 'Sau Luque', counter: 0 },
-    { name: 'Dagny Surrett', counter: 0 },
-    { name: 'Quiana Rasberry', counter: 0 },
-    { name: 'Nery Apicella', counter: 0 },
-    { name: 'Bennie Goldsmith', counter: 0 },
-    { name: 'Sharice Bennette', counter: 0 },
-    { name: 'Maris Olden', counter: 0 },
-    { name: 'Joane Lentini', counter: 0 },
-    { name: 'Keitha Brogden', counter: 0 },
-    { name: 'Meda Lauffer', counter: 0 },
-    { name: 'Malik Trout', counter: 0 },
-    { name: 'Marilee Levell', counter: 0 },
-    { name: 'Maurine Beedle', counter: 0 },
-    { name: 'Sammie Anton', counter: 0 },
-    { name: 'Janell Parker', counter: 0 },
-    { name: 'Tim Borunda', counter: 0 },
-    { name: 'Carlita Otter', counter: 0 },
-  ],
-  RM: [
-    { name: 'Amiee Beverley', counter: 0 },
-    { name: 'Carlita Otter', counter: 0 },
-  ]
-}
-
 async function readFile(file) {
   return new Promise(resolve => {
     const reader = new FileReader();
@@ -82,14 +35,23 @@ function parseCSV(content, separator = ',') {
       output[current] = [];
     }
 
-    output[current].push(element);
+    output[current].push({ name: element, counter: 0 });
   }
 
   return output;
 }
 
+function makeOptions(data) {
+  return Object.keys(data).map(key => ({ label: key, value: key }));
+}
+
 const Home = () => {
+  const [fileDialog, setFileDialog] = useState(false);
   const [selected, setSelected] = useState(null);
+  const [options, setOptions] = useState([]);
+  const [data, setData] = useState({});
+
+  const fileInput = useRef(null);
 
   const counterBodyTemplate = (row) => {
     return (
@@ -99,18 +61,18 @@ const Home = () => {
     );
   }
 
-  const [fileDialog, setFileDialog] = useState(false);
-  const fileInput = useRef(null);
-
   const importFile = () => {
-    fileInput.current.upload();
     setFileDialog(false);
+    fileInput.current.upload();
   }
 
   const onFileUpload = async (event) => {
     const content = await readFile(event.files[0]);
     const data = parseCSV(content);
-    console.log(data);
+    const options = makeOptions(data);
+
+    setData(data);
+    setOptions(options);
   }
 
   const openDialog = () => {
@@ -128,7 +90,7 @@ const Home = () => {
     </>
   );
 
-  const leftToolbarTemplate = <Dropdown placeholder="Select a list" value={selected} options={lists} onChange={e => setSelected(e.value)}></Dropdown>
+  const leftToolbarTemplate = <Dropdown placeholder="Select a list" value={selected} options={options} onChange={e => setSelected(e.value)}></Dropdown>
   const rightToolbarTemplate = <Button label="Import file" icon="pi pi-plus" className="p-button-success p-mr-2" onClick={openDialog} />
 
   return (
