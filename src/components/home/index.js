@@ -77,6 +77,13 @@ const Home = () => {
     setData(newData);
   }
 
+  const clearCounters = () => {
+    const newData = { ...data };
+    const newChildData = data[selected].map(row => ({ ...row, counter: 0 }));
+    newData[selected] = newChildData;
+    setData(newData);
+  }
+
   const counterBodyTemplate = (row) => {
     return (
       <InputNumber value={row.counter} showButtons buttonLayout="horizontal" step={1} min={0}
@@ -115,7 +122,11 @@ const Home = () => {
     </>
   );
 
-  const leftToolbarTemplate = <Dropdown placeholder="Select a list" value={selected} options={options} onChange={e => setSelected(e.value)}></Dropdown>
+  const leftToolbarTemplate = <>
+    <Dropdown placeholder="Select a list" value={selected} options={options} onChange={e => setSelected(e.value)}></Dropdown>
+    <Button style={{ marginLeft: '12px' }} icon="pi pi-trash" onClick={clearCounters} />
+  </>
+
   const rightToolbarTemplate = <Button label="Import file" icon="pi pi-plus" className="p-button-success p-mr-2" onClick={openDialog} />
 
   return (
