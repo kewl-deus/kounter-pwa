@@ -16,6 +16,8 @@ Technologies:
 
 ## Example
 
+![Screenshot](.github/screenshot.png)
+
 A CSV file must be formatted like this:
 
 | List name | Elements           |
@@ -67,10 +69,6 @@ Team B,Monet Caine
 ,Lamonica Miner
 ,Elton Standley
 ```
-
-The result is:
-
-![Screenshot](.github/screenshot.png)
 
 ## CLI Commands
 
