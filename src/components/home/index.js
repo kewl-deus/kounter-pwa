@@ -3,6 +3,8 @@ import { useRef, useState, useEffect } from 'preact/hooks';
 
 import style from './style.css';
 
+import { defaultCSV } from './dummyData';
+
 import { Dialog } from 'primereact/dialog';
 import { Toolbar } from 'primereact/toolbar';
 import { FileUpload } from 'primereact/fileupload';
@@ -45,10 +47,15 @@ function makeOptions(data) {
   return Object.keys(data).map(key => ({ label: key, value: key }));
 }
 
-function usePersister(name, state, stateUpdater) {
+function usePersister(name, state, stateUpdater, defaultValue) {
   useEffect(() => {
     const persistedState = window.localStorage.getItem(name);
-    persistedState && stateUpdater(JSON.parse(persistedState));
+
+    if (persistedState) {
+      stateUpdater(JSON.parse(persistedState));
+    } else if (defaultValue) {
+      stateUpdater(defaultValue());
+    }
   }, []);
 
   useEffect(() => {
@@ -64,8 +71,8 @@ const Home = () => {
 
   const fileInput = useRef(null);
 
-  usePersister('data', data, setData);
-  usePersister('options', options, setOptions);
+  usePersister('data', data, setData, () => parseCSV(defaultCSV));
+  usePersister('options', options, setOptions, () => makeOptions(parseCSV(defaultCSV)));
   usePersister('selected', selected, setSelected);
 
   const updateCounter = (name, counter) => {
