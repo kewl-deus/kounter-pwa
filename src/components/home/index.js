@@ -66,7 +66,7 @@ const Home = () => {
     return (
       <InputNumber value={row.counter} showButtons buttonLayout="horizontal" step={1} min={0}
         decrementButtonClassName="p-button-danger" incrementButtonClassName="p-button-success"
-        incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" />
+        incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" readOnly />
     );
   }
 
