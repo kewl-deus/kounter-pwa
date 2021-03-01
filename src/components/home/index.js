@@ -134,7 +134,7 @@ const Home = () => {
     <Button style={{ marginLeft: '12px' }} icon="pi pi-trash" onClick={clearCounters} />
   </>
 
-  const rightToolbarTemplate = <Button label="Import file" icon="pi pi-plus" className="p-button-success p-mr-2" onClick={openDialog} />
+  const rightToolbarTemplate = <Button icon="pi pi-upload" className="p-button-success p-mr-2" onClick={openDialog} />
 
   return (
     <main class={style.home}>
