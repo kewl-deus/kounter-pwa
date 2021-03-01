@@ -68,11 +68,21 @@ const Home = () => {
   usePersister('options', options, setOptions);
   usePersister('selected', selected, setSelected);
 
+  const updateCounter = (name, counter) => {
+    const newData = { ...data };
+    const newChildData = [...data[selected]];
+    const found = newChildData.findIndex(row => row.name === name);
+    newChildData[found] = { ...newChildData[found], counter };
+    newData[selected] = newChildData;
+    setData(newData);
+  }
+
   const counterBodyTemplate = (row) => {
     return (
       <InputNumber value={row.counter} showButtons buttonLayout="horizontal" step={1} min={0}
         decrementButtonClassName="p-button-danger" incrementButtonClassName="p-button-success"
-        incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" readOnly />
+        incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus" readOnly
+        onChange={e => updateCounter(row.name, e.value)} />
     );
   }
 
