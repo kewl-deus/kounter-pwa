@@ -1,6 +1,7 @@
 dependencies:
   preact: 10.5.12
   preact-render-to-string: 5.1.12_preact@10.5.12
+  preact-router: 3.2.1_preact@10.5.12
   primeicons: 4.1.0
   primereact: 6.0.2
   react-transition-group: 4.4.1
@@ -7411,6 +7412,14 @@ packages:
       preact: '>=10'
     resolution:
       integrity: sha512-nXVCOpvepSk9AfPwqS08rf9NDOCs8eeYYlG+7tE85iP5jVyjz+aYb1BYaP5SPdfVWVrzI9L5NzxozUvKaD96tA==
+  /preact-router/3.2.1_preact@10.5.12:
+    dependencies:
+      preact: 10.5.12
+    dev: false
+    peerDependencies:
+      preact: '>=10'
+    resolution:
+      integrity: sha512-KEN2VN1DxUlTwzW5IFkF13YIA2OdQ2OvgJTkQREF+AA2NrHRLaGbB68EjS4IeZOa1shvQ1FvEm3bSLta4sXBhg==
   /preact/10.5.12:
     dev: false
     resolution:
@@ -10037,6 +10046,7 @@ specifiers:
   preact: ^10.3.2
   preact-cli: ^3.0.0
   preact-render-to-string: ^5.1.4
+  preact-router: ^3.2.1
   primeicons: ^4.1.0
   primereact: ^6.0.2
   react-transition-group: ^4.4.1

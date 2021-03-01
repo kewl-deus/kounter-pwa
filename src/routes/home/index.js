@@ -100,7 +100,6 @@ const Home = () => {
     <main class={style.home}>
       <Toolbar className="p-mb-4" left={leftToolbarTemplate} right={rightToolbarTemplate}></Toolbar>
 
-
       <DataTable value={data[selected]}>
         <Column field="name" header="Name"></Column>
         <Column field="counter" header="Counter" body={counterBodyTemplate}></Column>
