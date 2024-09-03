@@ -5583,8 +5583,8 @@ body {
 @font-face {
     font-family: 'primeicons';
     font-display: auto;
-    src: url(/kounter/dfbfef2de4bfb34e9722e83542173aaf.eot);
-    src: url(/kounter/dfbfef2de4bfb34e9722e83542173aaf.eot?#iefix) format('embedded-opentype'), url(/kounter/3a0d4a58da62cf7c55bb243e98b172b5.ttf) format('truetype'), url(/kounter/e61f3495a7ecd3d571a4c9a98797e955.woff) format('woff'), url(/kounter/c55d94a248721abbd2205460c2ca9cea.svg?#primeicons) format('svg');
+    src: url(/kounter-pwa/dfbfef2de4bfb34e9722e83542173aaf.eot);
+    src: url(/kounter-pwa/dfbfef2de4bfb34e9722e83542173aaf.eot?#iefix) format('embedded-opentype'), url(/kounter-pwa/3a0d4a58da62cf7c55bb243e98b172b5.ttf) format('truetype'), url(/kounter-pwa/e61f3495a7ecd3d571a4c9a98797e955.woff) format('woff'), url(/kounter-pwa/c55d94a248721abbd2205460c2ca9cea.svg?#primeicons) format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -6466,4 +6466,4 @@ body {
 }
 
 
-/*# sourceMappingURL=ssr-bundle.a736e.css.map*/
+/*# sourceMappingURL=ssr-bundle.cde67.css.map*/
