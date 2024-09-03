@@ -1,7 +1,7 @@
 {
     "name": "Kounter",
     "short_name": "Kounter",
-    "start_url": "/kounter",
+    "start_url": "/kounter-pwa",
     "display": "standalone",
     "orientation": "portrait",
     "background_color": "#fff",
